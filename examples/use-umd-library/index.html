@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Use UMD library</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+  <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5" role="main">
+    <h1 class="title">Use UMD library</h1>
+    <div class="example">
+      <form>
+        <div class="form-row align-items-center flex-sm-nowrap">
+          <div class="col-auto"><input type="number" id="num1" class="form-control" placeholder="0" autofocus="autofocus"></div>
+          <label class="mr-2">+</label>
+          <div class="col-auto"><input type="number" id="num2" class="form-control" placeholder="0"></div>
+          <label class="mr-2">=</label>
+          <div class="col-auto"><input type="number" id="result" class="form-control" placeholder="0" disabled="disabled"></div>
+        </div>
+      </form>
+    </div>
+    <figure class="highlight">
+      <label>html:</label>
+      <pre><code>&lt;script src=&quot;node_modules/esm-and-other-format-libraries-starter/dist/mylib.js&quot;&gt;&lt;/script&gt;</code></pre>
+      <label>js:</label>
+      <pre><code>&lt;script&gt;
+document.querySelectorAll(&#039;#num1,#num2&#039;).forEach(el =&gt; 
+  el.addEventListener(&#039;input&#039;, () =&gt; {
+    const num1 = parseFloat(document.querySelector(&#039;#num1&#039;).value, 0) || 0;
+    const num2 = parseFloat(document.querySelector(&#039;#num2&#039;).value, 0) || 0;
+    document.querySelector(&#039;#result&#039;).value = mylib.add(num1, num2);
+  }
+));
+&lt;/script&gt;</code></pre>
+    </figure>
+  </div>
+  <script src="node_modules/esm-and-other-format-libraries-starter/dist/mylib.js"></script>
+  <script>
+  document.querySelectorAll('#num1,#num2').forEach(el => 
+    el.addEventListener('input', () => {
+      const num1 = parseFloat(document.querySelector('#num1').value, 0) || 0;
+      const num2 = parseFloat(document.querySelector('#num2').value, 0) || 0;
+      document.querySelector('#result').value = mylib.add(num1, num2);
+    }
+  ));
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+{
+  "name": "esm-and-other-format-libraries-starter",
+  "version": "1.0.0",
+  "description": "This is a start kit for developing ECMAScript standard EM Modules format library with TypeScript.",
+  "main": "dist/mylib.common.js",
+  "module": "dist/mylib.esm.js",
+  "browser": "dist/mylib.js",
+  "types": "types/mylib.d.ts",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://takuya-motoshima@github.com/takuya-motoshima/esm-and-other-format-libraries-starter.git"
+  },
+  "keywords": [
+    "browser",
+    "javascript",
+    "js",
+    "library",
+    "lib",
+    "module",
+    "typescript",
+    "ts",
+    "esm",
+    "es6",
+    "mjs",
+    "rollup"
+  ],
+  "author": "Takuya Motoshima <developer.takuyamotoshima@gmail.com> (https://twitter.com/taaaaaaakuya)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/takuya-motoshima/esm-and-other-format-libraries-starter/issues",
+    "email": "developer.takuyamotoshima@gmail.com"
+  },
+  "homepage": "https://github.com/takuya-motoshima/esm-and-other-format-libraries-starter#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "jest": "^24.9.0",
+    "rollup": "^1.26.4",
+    "rollup-plugin-terser": "^5.1.2",
+    "rollup-plugin-typescript2": "^0.25.2",
+    "ts-jest": "^24.1.0",
+    "ts-loader": "^6.2.1",
+    "ts-node": "^8.5.0",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.7.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {}
+}

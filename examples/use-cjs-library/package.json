@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "build": "npx webpack app.js -o bundle.js"
+  },
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}
