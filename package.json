@@ -1,6 +1,6 @@
 {
   "name": "esm-and-other-format-libraries-starter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This is a start kit for developing ECMAScript standard EM Modules format library with TypeScript.",
   "main": "dist/mylib.common.js",
   "module": "dist/mylib.esm.js",
