@@ -1,1 +1,5 @@
-{}
+{
+  "dependencies": {
+    "esm-and-other-format-libraries-starter": "^1.0.0"
+  }
+}

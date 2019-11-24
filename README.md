@@ -6,7 +6,7 @@ This is a start kit for developing ECMAScript standard EM Modules format library
 
 |ES Module|UMD|CommonJS|
 |--|--|--|
-|yourLibrary.esm.js|yourLibrary.js|yourLibrary.common.js|
+|your-library.esm.js|your-library.js|your-library.common.js|
 
 ## Create your library.
 
@@ -15,7 +15,7 @@ In this chapter, we will explain how to implement libraries in three formats: EC
 1. Create project.
 
     ```sh
-    mkdir yourLibrary && cd $_;
+    mkdir your-library && cd $_;
     ```
 
 1. Create project configuration file.
@@ -31,19 +31,19 @@ In this chapter, we will explain how to implement libraries in three formats: EC
 
     ```js
     ...
-    "main": "dist/yourLibrary.common.js",
-    "module": "dist/yourLibrary.esm.js",
-    "browser": "dist/yourLibrary.js",
-    "types": "types/yourLibrary.d.ts",
+    "main": "dist/your-library.common.js",
+    "module": "dist/your-library.esm.js",
+    "browser": "dist/your-library.js",
+    "types": "types/your-library.d.ts",
     ...
     ```
 
     |Name|Value|Description|
     |--|--|--|
-    |main|dist/yourLibrary.common.js|Library name to output in CommonJS format.|
-    |module|dist/yourLibrary.esm.js|Library name to output in ES Modules format.|
-    |browser|dist/yourLibrary.js|Library name output in UMD format.|
-    |types|types/yourLibrary.d.ts|Set the typescript declaration file.|
+    |main|dist/your-library.common.js|Library name to output in CommonJS format.|
+    |module|dist/your-library.esm.js|Library name to output in ES Modules format.|
+    |browser|dist/your-library.js|Library name output in UMD format.|
+    |types|types/your-library.d.ts|Set the typescript declaration file.|
 
 1. Install required packages.
  
@@ -156,7 +156,7 @@ In this chapter, we will explain how to implement libraries in three formats: EC
     Main module that imports multiple modules and exports a single library.  
 
     ```js
-    // src/yourLibrary.ts
+    // src/your-library.ts
     import add from '~/add';
     import sub from '~/sub';
     export {add, sub};
@@ -169,7 +169,7 @@ In this chapter, we will explain how to implement libraries in three formats: EC
 
     ```sh
     npx ts-node -r tsconfig-paths/register -P tsconfig.json -O '{"module":"commonjs"}' -e "\
-        import {add} from '~/yourLibrary';
+        import {add} from '~/your-library';
         console.log('1+2=' + add(1,2));";# 1+2=3
     ```
 1. Setting up and running unit tests.  
@@ -224,7 +224,7 @@ In this chapter, we will explain how to implement libraries in three formats: EC
 
     ```js
     // tests/add.test.ts
-    import {add} from '~/yourLibrary';
+    import {add} from '~/your-library';
     test('Add 1 + 2 to equal 3', () => {
       expect(add(1, 2)).toBe(3);
     });    
@@ -232,7 +232,7 @@ In this chapter, we will explain how to implement libraries in three formats: EC
 
     ```js
     // tests/sub.test.ts
-    import {sub} from '~/yourLibrary';
+    import {sub} from '~/your-library';
     test('Subtract 1 - 2 to equal -1', () => {
       expect(sub(1, 2)).toBe(-1);
     });
@@ -267,8 +267,10 @@ In this chapter, we will explain how to implement libraries in three formats: EC
     Ran all test suites.
     ```
 
-1. Configure and run the build.  
-Compile the TypeScript library and resolve the module dependency to create a library that can be distributed to clients.
+1. Run the build.  
+There is one caveat.  
+Convert UMD library names in global namespace from snake case to camel case.
+In the case of e.g.your-library, it will be window.yourLibrary.  
 
     Create a build configuration file.
 
@@ -284,7 +286,7 @@ Compile the TypeScript library and resolve the module dependency to create a lib
     import pkg from './package.json';
     export default {
       external: Object.keys(pkg['dependencies'] || []),
-      input: './src/yourLibrary.ts',
+      input: './src/your-library.ts',
       plugins: [
         typescript({
           tsconfigDefaults: { compilerOptions: {} },
@@ -309,7 +311,9 @@ Compile the TypeScript library and resolve the module dependency to create a lib
         {
           format: 'umd',
           file: pkg.browser,
-          name: pkg.browser.replace(/^.*\/|\.js$/g, '')
+          name: pkg.browser
+            .replace(/^.*\/|\.js$/g, '')
+            .replace(/([-_][a-z])/g, (group) => group.toUpperCase().replace('-', '').replace('_', ''))
         }
       ]
     }
@@ -344,11 +348,11 @@ Compile the TypeScript library and resolve the module dependency to create a lib
     ```
     .
         -- dist/
-            -- yourLibrary.esm.js
-            -- yourLibrary.common.js
-            -- yourLibrary.js
+            -- your-library.esm.js
+            -- your-library.common.js
+            -- your-library.js
         -- types/
-            -- yourLibrary.d.ts
+            -- your-library.d.ts
             -- add.d.ts
             -- sub.d.ts
     ```

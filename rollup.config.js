@@ -28,7 +28,9 @@ export default {
     {
       format: 'umd',
       file: pkg.browser,
-      name: pkg.browser.replace(/^.*\/|\.js$/g, '')
+      name: pkg.browser
+        .replace(/^.*\/|\.js$/g, '')
+        .replace(/([-_][a-z])/g, (group) => group.toUpperCase().replace('-', '').replace('_', ''))
     }
   ]
 }
